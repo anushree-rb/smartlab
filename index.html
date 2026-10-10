@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLab Scheduling</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background: #172554;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        main {
+            max-width: 800px;
+            margin: 25px auto;
+        }
+        section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #0001;
+        }
+        input, select, button {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 11px;
+            margin: 8px 0;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SmartLab</h1>
+        <p>Laboratory Scheduling System</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Schedule a Laboratory Session</h2>
+            <form method="POST">
+                <label>Experiment Name</label>
+                <input name="experiment" required
+                       placeholder="Enter experiment name">
+
+                <label>Laboratory</label>
+                <select name="lab" required>
+                    <option value="Physics Lab">Physics Lab</option>
+                    <option value="Chemistry Lab">Chemistry Lab</option>
+                    <option value="Computer Lab">Computer Lab</option>
+                    <option value="Electronics Lab">Electronics Lab</option>
+                </select>
+
+                <label>Instructor Name</label>
+                <input name="instructor" required
+                       placeholder="Enter instructor name">
+
+                <label>Date</label>
+                <input type="date" name="date" required>
+
+                <label>Time</label>
+                <select name="time" required>
+                    <option value="9:00 AM">9:00 AM</option>
+                    <option value="10:00 AM">10:00 AM</option>
+                    <option value="11:00 AM">11:00 AM</option>
+                    <option value="2:00 PM">2:00 PM</option>
+                </select>
+
+                <button type="submit">Save Schedule</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Scheduled Sessions</h2>
+            {% if schedules %}
+            <table>
+                <tr>
+                    <th>Experiment</th>
+                    <th>Lab</th>
+                    <th>Instructor</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+                {% for s in schedules %}
+                <tr>
+                    <td>{{ s[1] }}</td>
+                    <td>{{ s[2] }}</td>
+                    <td>{{ s[3] }}</td>
+                    <td>{{ s[4] }}</td>
+                    <td>{{ s[5] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>No sessions scheduled yet.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
